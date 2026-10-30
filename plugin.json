@@ -1,0 +1,5 @@
+{
+  "$schema": "https://antigravity.google/schemas/v1/plugin.json",
+  "name": "test-e2e-playwright",
+  "description": "Explores web application screens and creates stable, traceable Playwright E2E coverage."
+}

@@ -1,0 +1,16 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "test-e2e-playwright",
+  "description": "Playwright E2E testing skill for coding agents.",
+  "owner": {
+    "name": "Reginaldo"
+  },
+  "plugins": [
+    {
+      "name": "test-e2e-playwright",
+      "description": "Explore application screens and implement stable Playwright E2E tests.",
+      "source": "./",
+      "category": "development"
+    }
+  ]
+}

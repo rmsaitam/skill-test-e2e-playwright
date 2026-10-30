@@ -1,0 +1,20 @@
+{
+  "name": "test-e2e-playwright",
+  "version": "0.1.0",
+  "description": "Explores web application screens and creates stable, traceable Playwright E2E coverage.",
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Test E2E Playwright",
+    "shortDescription": "Explore screens and build stable Playwright E2E tests",
+    "longDescription": "Inspect an application, inventory its navigable screens, implement stable end-to-end tests, and report verified route coverage.",
+    "category": "Developer Tools",
+    "capabilities": [
+      "Interactive",
+      "Read",
+      "Write"
+    ],
+    "defaultPrompt": [
+      "Use $test-e2e-playwright to inspect the app and implement E2E coverage for its navigable screens."
+    ]
+  }
+}

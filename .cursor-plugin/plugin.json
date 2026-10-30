@@ -1,0 +1,7 @@
+{
+  "name": "test-e2e-playwright",
+  "version": "0.1.0",
+  "description": "Explores web application screens and creates stable, traceable Playwright E2E coverage.",
+  "skills": "./skills/",
+  "commands": "./commands/"
+}

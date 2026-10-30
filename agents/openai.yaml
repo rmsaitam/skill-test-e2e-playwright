@@ -1,0 +1,4 @@
+interface:
+  display_name: "Test E2E Playwright"
+  short_description: "Explore screens and build stable Playwright E2E tests"
+  default_prompt: "Use $test-e2e-playwright to inspect the app and implement E2E coverage for its navigable screens."

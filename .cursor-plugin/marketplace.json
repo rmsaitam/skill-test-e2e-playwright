@@ -1,0 +1,16 @@
+{
+  "name": "test-e2e-playwright",
+  "owner": {
+    "name": "Reginaldo"
+  },
+  "metadata": {
+    "description": "Playwright E2E testing skill for coding agents."
+  },
+  "plugins": [
+    {
+      "name": "test-e2e-playwright",
+      "source": ".",
+      "description": "Explore application screens and implement stable Playwright E2E tests."
+    }
+  ]
+}
