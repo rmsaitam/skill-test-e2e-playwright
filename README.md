@@ -1,53 +1,55 @@
 # Test E2E Playwright
 
-Uma skill multiplataforma para agentes de programação inspecionarem aplicações web no navegador, inventariarem suas rotas navegáveis e implementarem testes E2E estáveis com Playwright.
+A cross-platform skill for coding agents to inspect web applications in a browser, inventory their navigable routes, and implement stable Playwright end-to-end tests.
 
-## Agentes compatíveis
+Repository: [rmsaitam/skill-test-e2e-playwright](https://github.com/rmsaitam/skill-test-e2e-playwright)
 
-O conteúdo canônico fica em `skills/test-e2e-playwright/SKILL.md`. Os manifests integram o pacote com:
+## Supported agents
 
-- Codex: `.codex-plugin/` e `.agents/plugins/`
+The canonical skill lives in `skills/test-e2e-playwright/SKILL.md`. Plugin manifests integrate it with:
+
+- Codex: `.codex-plugin/` and `.agents/plugins/`
 - Claude Code: `.claude-plugin/`
-- Antigravity: `plugin.json` na raiz
+- Antigravity: the root `plugin.json`
 - Cursor: `.cursor-plugin/`
-- GitHub Copilot: `plugin.json` e `.github/plugin/`
-- Outros agentes que aceitam skills: diretório `skills/`
+- GitHub Copilot: `plugin.json` and `.github/plugin/`
+- Other agents that support skills: the `skills/` directory
 
-Os comandos ficam em `commands/`. Cada host pode ter requisitos próprios de instalação e ativação de plugins; consulte a documentação atual do agente.
+Commands are in `commands/`. Plugin installation and activation can vary by host and version; refer to the current documentation for your agent.
 
-## Uso
+## Usage
 
-Ative `test-e2e-playwright` ou use o comando `/test-e2e-playwright` no host compatível. Você escolhe o modo em cada execução. Se não informar a opção no pedido, o agente perguntará antes de iniciar a exploração.
+Activate `test-e2e-playwright` or use `/test-e2e-playwright` in a compatible host. Choose an execution mode for each run. If you do not specify one in your request, the agent will ask before exploring screens.
 
-### Modo automático
+### Autonomous mode
 
-O agente percorre as rotas identificadas, registra o inventário, implementa os testes e executa a verificação sem parar para aprovação tela por tela. O navegador continua visível para acompanhamento; a diferença é que o agente não aguarda confirmação entre as telas.
+The agent explores the discovered routes, records the inventory, implements the tests, and runs verification without pausing for per-screen approval. The browser remains visible so you can observe the work, but the agent does not wait for confirmation between screens.
 
-Exemplo de pedido: `Use test-e2e-playwright no modo automático para cobrir as telas do projeto.`
+Example request: `Use test-e2e-playwright in autonomous mode to cover the project's screens.`
 
-### Modo acompanhado
+### Guided mode
 
-O agente trabalha uma tela por vez: abre a rota no navegador visível, informa qual tela está exibindo e o que observou, e aguarda você revisar e confirmar/corrigir antes de avançar para a próxima. Você também pode pedir uma interação específica nessa tela. Depois da exploração, o agente implementa e executa os testes por tela, apresenta o teste e o resultado, e espera sua revisão para prosseguir.
+The agent works through one screen at a time: it opens the route in the visible browser, tells you which screen it is showing and what it observed, and waits for you to review and confirm or correct it before moving on. You can also request a specific interaction on that screen. After exploration, the agent implements and runs tests one screen at a time, shows you each test and its result, and waits for your review before proceeding.
 
-Exemplo de pedido: `Use test-e2e-playwright no modo acompanhado e espere minha confirmação a cada tela.`
+Example request: `Use test-e2e-playwright in guided mode and wait for my confirmation on every screen.`
 
-Nesse modo, a aprovação é uma pausa real: se o agente não puder aguardar uma resposta no host, ele deve parar no ponto de revisão e não continuar silenciosamente. Você pode trocar de modo durante uma pausa.
+In guided mode, review checkpoints are real pauses. If the agent host cannot wait for your response, the agent must stop at the checkpoint instead of continuing silently. You can switch modes at a checkpoint.
 
-`8931` é a porta SSE do servidor MCP, não a porta da aplicação. O navegador aberto é uma sessão Playwright visível e isolada, sem reutilizar o perfil ou as credenciais do navegador habitual do usuário. Cobertura de telas significa rotas navegáveis inventariadas com testes passando; não significa 100% de cobertura de código.
+`8931` is the MCP server's SSE port, not the application's port. The browser is a visible, isolated Playwright session; it does not reuse your regular browser profile or credentials. Screen coverage means inventoried navigable routes with passing tests, not 100% code coverage.
 
-## Instalação via skills.sh
+## Installation with skills.sh
 
-Depois de publicar o repositório, instale a skill com:
+Install the skill with:
 
 ```bash
-npx skills add <owner>/skill-test-e2e-playwright
+npx skills add rmsaitam/skill-test-e2e-playwright
 ```
 
-Substitua `<owner>` pelo proprietário GitHub do repositório publicado. Instalações via marketplace/plugin devem usar a documentação atual do agente correspondente.
+For marketplace or plugin installation, follow the current documentation for the relevant agent.
 
-## Desenvolvimento e validação
+## Development and validation
 
-Requisitos: Python 3.10+; não há dependências Python adicionais.
+Requirements: Python 3.10 or newer. No additional Python dependencies are required.
 
 ```bash
 make test
@@ -55,4 +57,4 @@ make validate
 make check
 ```
 
-O validador verifica os manifests, os arquivos obrigatórios e os elementos essenciais do contrato da skill. Consulte `skills/test-e2e-playwright/references/` para regras de browser, inventário, estabilidade e triagem.
+The validator checks manifests, required files, and essential parts of the skill contract. See `skills/test-e2e-playwright/references/` for browser, inventory, stability, and failure-triage guidance.

@@ -119,7 +119,7 @@ def _check_readme_modes(path: Path, errors: list[str]) -> None:
         errors.append(f"{path}: cannot read README ({error})")
         return
 
-    for mode in ("modo automático", "modo acompanhado"):
+    for mode in ("autonomous mode", "guided mode"):
         if mode not in content:
             errors.append(f"{path}: must document both execution modes; missing {mode}")
 

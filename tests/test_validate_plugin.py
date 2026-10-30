@@ -90,8 +90,8 @@ def create_valid_package(root: Path) -> None:
         elif relative == "README.md":
             content = (
                 "# Test E2E Playwright\n\n"
-                "### Modo automático\n"
-                "### Modo acompanhado\n"
+                "### Autonomous mode\n"
+                "### Guided mode\n"
             )
         else:
             content = "present\n"
@@ -177,18 +177,18 @@ class ValidatePluginTests(unittest.TestCase):
 
             self.assertTrue(any("invalid or unreadable JSON" in error for error in errors))
 
-    def test_requires_readme_to_explain_both_execution_modes(self) -> None:
+    def test_requires_readme_to_explain_both_execution_modes_in_english(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
             create_valid_package(root)
             (root / "README.md").write_text(
-                "# Test E2E Playwright\n\n## Modo automático\n",
+                "# Test E2E Playwright\n\n## Autonomous mode\n",
                 encoding="utf-8",
             )
 
             errors = validate_plugin(root)
 
-            self.assertTrue(any("modo acompanhado" in error.lower() for error in errors))
+            self.assertTrue(any("guided mode" in error.lower() for error in errors))
 
 
 if __name__ == "__main__":
