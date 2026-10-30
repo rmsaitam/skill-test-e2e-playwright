@@ -112,7 +112,7 @@ def _check_skill_contract(path: Path, errors: list[str]) -> None:
             errors.append(f"{path}: missing execution mode: {mode}")
 
 
-def _check_readme_modes(path: Path, errors: list[str]) -> None:
+def _check_readme_contract(path: Path, errors: list[str]) -> None:
     try:
         content = path.read_text(encoding="utf-8").casefold()
     except OSError as error:
@@ -122,6 +122,17 @@ def _check_readme_modes(path: Path, errors: list[str]) -> None:
     for mode in ("autonomous mode", "guided mode"):
         if mode not in content:
             errors.append(f"{path}: must document both execution modes; missing {mode}")
+
+    badge = (
+        "[![skills.sh](https://skills.sh/b/rmsaitam/skill-test-e2e-playwright)]"
+        "(https://skills.sh/rmsaitam/skill-test-e2e-playwright)"
+    )
+    if badge.casefold() not in content:
+        errors.append(f"{path}: missing the skills.sh badge for this skill")
+    if "npx skills add rmsaitam/skill-test-e2e-playwright -g -y" not in content:
+        errors.append(f"{path}: missing the global install command")
+    if "\nrepository:" in content:
+        errors.append(f"{path}: remove the standalone Repository line")
 
 
 def validate_plugin(root: Path) -> list[str]:
@@ -178,7 +189,7 @@ def validate_plugin(root: Path) -> list[str]:
 
     readme = root / "README.md"
     if readme.is_file():
-        _check_readme_modes(readme, errors)
+        _check_readme_contract(readme, errors)
 
     return errors
 

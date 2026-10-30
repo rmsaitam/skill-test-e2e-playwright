@@ -90,8 +90,11 @@ def create_valid_package(root: Path) -> None:
         elif relative == "README.md":
             content = (
                 "# Test E2E Playwright\n\n"
+                "[![skills.sh](https://skills.sh/b/rmsaitam/skill-test-e2e-playwright)]"
+                "(https://skills.sh/rmsaitam/skill-test-e2e-playwright)\n\n"
                 "### Autonomous mode\n"
                 "### Guided mode\n"
+                "npx skills add rmsaitam/skill-test-e2e-playwright -g -y\n"
             )
         else:
             content = "present\n"
@@ -189,6 +192,38 @@ class ValidatePluginTests(unittest.TestCase):
             errors = validate_plugin(root)
 
             self.assertTrue(any("guided mode" in error.lower() for error in errors))
+
+    def test_requires_skills_sh_badge_and_global_install_command(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            create_valid_package(root)
+            (root / "README.md").write_text(
+                "# Test E2E Playwright\n\n"
+                "### Autonomous mode\n"
+                "### Guided mode\n"
+                "npx skills add rmsaitam/skill-test-e2e-playwright\n",
+                encoding="utf-8",
+            )
+
+            errors = validate_plugin(root)
+
+            self.assertTrue(any("skills.sh badge" in error.lower() for error in errors))
+            self.assertTrue(any("global install command" in error.lower() for error in errors))
+
+    def test_rejects_standalone_repository_line(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            create_valid_package(root)
+            readme = root / "README.md"
+            readme.write_text(
+                readme.read_text(encoding="utf-8")
+                + "\nRepository: https://github.com/rmsaitam/skill-test-e2e-playwright\n",
+                encoding="utf-8",
+            )
+
+            errors = validate_plugin(root)
+
+            self.assertTrue(any("standalone Repository line" in error for error in errors))
 
 
 if __name__ == "__main__":

@@ -1,8 +1,8 @@
 # Test E2E Playwright
 
-A cross-platform skill for coding agents to inspect web applications in a browser, inventory their navigable routes, and implement stable Playwright end-to-end tests.
+[![skills.sh](https://skills.sh/b/rmsaitam/skill-test-e2e-playwright)](https://skills.sh/rmsaitam/skill-test-e2e-playwright)
 
-Repository: [rmsaitam/skill-test-e2e-playwright](https://github.com/rmsaitam/skill-test-e2e-playwright)
+A cross-platform skill for coding agents to inspect web applications in a browser, inventory their navigable routes, and implement stable Playwright end-to-end tests.
 
 ## Supported agents
 
@@ -43,7 +43,15 @@ Install the skill with:
 
 ```bash
 npx skills add rmsaitam/skill-test-e2e-playwright
+
+# Install globally without prompts
+npx skills add rmsaitam/skill-test-e2e-playwright -g -y
+
+# List available skills
+npx skills add rmsaitam/skill-test-e2e-playwright --list
 ```
+
+The global installation makes the skill available across projects for detected compatible agents. Use the default command for project-level installation instead.
 
 For marketplace or plugin installation, follow the current documentation for the relevant agent.
 
